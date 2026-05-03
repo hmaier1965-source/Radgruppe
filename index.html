@@ -39,6 +39,32 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<style>
+.readonly-mode { pointer-events: none; }
+.admin-mode .member-item, .admin-mode .chip {
+  border: 1px solid color-mix(in oklab, var(--color-text) 14%, transparent);
+  box-shadow: 0 0 0 2px transparent;
+  border-radius: var(--radius-lg);
+  outline: 2px solid transparent;
+  transition: outline 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.admin-mode .member-item:hover,
+.admin-mode .chip:hover {
+  outline: 2px solid var(--color-primary);
+  border-color: var(--color-primary);
+  background: color-mix(in oklab, var(--color-primary-highlight) 80%, transparent);
+}
+
+.admin-mode .member-item.active,
+.admin-mode .chip.active {
+  outline: 2px solid var(--color-primary);
+  border-color: var(--color-primary);
+  background: color-mix(in oklab, var(--color-primary-highlight) 80%, transparent);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+</style>
 </head>
 <body>
   <div class="app">
@@ -63,7 +89,7 @@
               <button class="btn btn-primary" id="addMemberBtn" type="button">Teilnehmer speichern</button>
             </div>
             <div class="field-row">
-              <div class="field"><label for="rideTitle">Name der Ausfahrt</label><input id="rideTitle" type="text" placeholder="Zum Beispiel: Sonntagsrunde Schönbuch" /></div>
+              
               <div class="field"><label for="rideDate">Datum</label><input id="rideDate" type="date" /></div>
               <button class="btn btn-secondary" id="todayBtn" type="button">Heute setzen</button>
             </div>
@@ -184,5 +210,23 @@
     rideDate.value=new Date().toISOString().slice(0,10);
     if(!('indexedDB' in window)){storageStatus.textContent='IndexedDB wird in diesem Browser nicht unterstützt'; render()} else {openDb().then(loadDb).then(()=>{searchMember.value=state.search; render()}).catch(()=>{storageStatus.textContent='Dauerhafte Speicherung nicht verfügbar'; render()})}
   </script>
+
+<script>
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const isAdmin = params.get('admin') === 'radfreunde2026';
+  const controls = document.querySelectorAll('.controls input, .controls select, .controls button, .sidebar .btn, .member-item button, .ride-card button');
+  if (!isAdmin) {
+    controls.forEach(el => { el.disabled = true; el.style.display = 'none'; });
+    const banner = document.createElement('div');
+    banner.textContent = 'Lesemodus — nur Anzeige';
+    banner.style.cssText = 'position:sticky;top:0;z-index:20;padding:12px 16px;background:#01696f;color:#fff;font-weight:700;text-align:center';
+    document.body.prepend(banner);
+    document.body.classList.add('readonly-mode');
+  } else {
+    document.body.classList.add('admin-mode');
+  }
+})();
+</script>
 </body>
 </html>
