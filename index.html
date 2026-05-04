@@ -4,229 +4,147 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#01696f" />
-  <title>Radfreunde Ausfahrten V5</title>
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=zodiak@400,700&display=swap" rel="stylesheet">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>Radfreunde</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
   <style>
-    :root, [data-theme="light"] {
-      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
-      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
-      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
-      --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-5:1.25rem; --space-6:1.5rem; --space-8:2rem; --space-10:2.5rem; --space-12:3rem;
-      --color-bg:#f7f6f2; --color-surface:#f9f8f5; --color-surface-2:#fbfbf9; --color-text:#28251d; --color-text-muted:#7a7974; --color-primary:#01696f; --color-primary-hover:#0c4e54; --color-primary-highlight:#cedcd8; --color-danger:#a13544;
-      --radius-md:.5rem; --radius-lg:.75rem; --radius-xl:1rem; --radius-full:9999px;
-      --shadow-sm:0 1px 2px rgb(0 0 0 / 0.06);
-      --font-body:'Satoshi', system-ui, sans-serif; --font-display:'Zodiak', Georgia, serif;
-    }
-    [data-theme="dark"] {
-      --color-bg:#171614; --color-surface:#1c1b19; --color-surface-2:#201f1d; --color-text:#cdccca; --color-text-muted:#979693; --color-primary:#4f98a3; --color-primary-hover:#227f8b; --color-primary-highlight:#313b3b; --color-danger:#dd6974;
-      --shadow-sm:0 1px 2px rgb(0 0 0 / 0.2);
-    }
-    *,*:before,*:after{box-sizing:border-box} html{-webkit-text-size-adjust:100%;text-size-adjust:100%} body{margin:0;min-height:100vh;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:var(--text-base);line-height:1.55}
-    button,input,select{font:inherit;color:inherit} button{cursor:pointer;border:none} input,select{width:100%;min-height:44px;background:var(--color-surface-2);color:var(--color-text);border:1px solid color-mix(in oklab,var(--color-text) 12%,transparent);border-radius:var(--radius-lg);padding:.8rem .95rem}
-    .app{max-width:1360px;margin:0 auto;padding:var(--space-4)} .topbar{display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);padding:var(--space-4) 0 var(--space-6)} .brand{display:flex;align-items:center;gap:var(--space-3)} .logo{width:48px;height:48px;color:var(--color-primary)} .brand h1{margin:0;font-family:var(--font-display);font-size:var(--text-xl);line-height:1}.brand p{margin:.25rem 0 0;color:var(--color-text-muted);font-size:var(--text-sm)} .theme-toggle{width:44px;height:44px;border-radius:var(--radius-full);background:var(--color-surface);box-shadow:var(--shadow-sm);border:1px solid color-mix(in oklab,var(--color-text) 10%,transparent)}
-    .layout{display:grid;grid-template-columns:1.08fr .92fr;gap:var(--space-5)} .panel{background:var(--color-surface);border-radius:var(--radius-xl);border:1px solid color-mix(in oklab,var(--color-text) 12%,transparent);box-shadow:var(--shadow-sm)} .hero,.sidebar,.section{padding:var(--space-6)} .eyebrow{display:inline-flex;align-items:center;gap:var(--space-2);padding:.35rem .7rem;border-radius:var(--radius-full);background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.08em;font-weight:700} .hero h2{margin:var(--space-4) 0 var(--space-3);font-size:var(--text-xl);font-family:var(--font-display);line-height:1.08}.helper,.hero p{margin:0;color:var(--color-text-muted);font-size:var(--text-sm)}
-    .controls{display:grid;gap:var(--space-4);margin-top:var(--space-6)} .field-row{display:grid;grid-template-columns:1.1fr .9fr auto;gap:var(--space-3);align-items:end} .field{display:grid;gap:var(--space-2)} .field label{font-size:var(--text-sm);font-weight:700} .btn{min-height:44px;padding:.8rem 1rem;border-radius:var(--radius-lg);font-size:var(--text-sm);font-weight:700} .btn-primary{background:var(--color-primary);color:#fff}.btn-primary:hover{background:var(--color-primary-hover)} .btn-secondary{background:transparent;border:1px solid color-mix(in oklab,var(--color-text) 12%,transparent)} .btn-danger{background:transparent;border:1px solid color-mix(in oklab,var(--color-danger) 40%,transparent);color:var(--color-danger)}
-    .stats-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--space-4);margin-top:var(--space-6)} .stat{padding:var(--space-4);border-radius:var(--radius-lg);background:var(--color-surface-2)} .stat strong{display:block;font-family:var(--font-display);font-size:var(--text-xl);line-height:1;margin-bottom:var(--space-2)} .stat span{color:var(--color-text-muted);font-size:var(--text-sm)}
-    .sidebar{display:grid;gap:var(--space-4)} .chip-list,.tools{display:flex;flex-wrap:wrap;gap:var(--space-2)} .chip{display:inline-flex;align-items:center;padding:.38rem .7rem;border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:700;background:var(--color-primary-highlight);color:var(--color-primary)} .status{padding:.55rem .8rem;border-radius:var(--radius-full);background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-xs);font-weight:700}
-    .list-box{max-height:280px;overflow:auto;display:grid;gap:var(--space-2)} .member-item{display:flex;justify-content:space-between;align-items:center;gap:var(--space-3);padding:.8rem .9rem;border-radius:var(--radius-lg);background:var(--color-surface-2)}
-    .section{margin-top:var(--space-5)} .section-head{display:flex;justify-content:space-between;align-items:center;gap:var(--space-3);margin-bottom:var(--space-4)} .rank-table{width:100%;border-collapse:collapse}.rank-table th,.rank-table td{padding:.8rem .5rem;border-bottom:1px solid color-mix(in oklab,var(--color-text) 10%,transparent);text-align:left}.rank-table th{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.08em;color:var(--color-text-muted)} .bar-wrap{width:100%;min-width:120px;height:10px;border-radius:var(--radius-full);background:color-mix(in oklab,var(--color-text) 8%,transparent);overflow:hidden}.bar{height:100%;background:linear-gradient(90deg,var(--color-primary),color-mix(in oklab,var(--color-primary) 70%,white));border-radius:var(--radius-full)}
-    .rides-list{display:grid;gap:var(--space-3)} .ride-card{padding:var(--space-4);border-radius:var(--radius-xl);background:var(--color-surface-2);border:1px solid color-mix(in oklab,var(--color-text) 10%,transparent)} .ride-top{display:flex;justify-content:space-between;gap:var(--space-3);align-items:flex-start;margin-bottom:var(--space-3)} .participants{display:flex;flex-wrap:wrap;gap:var(--space-2)} .pill{display:inline-flex;align-items:center;padding:.35rem .6rem;border-radius:var(--radius-full);background:var(--color-surface);font-size:var(--text-xs)} .empty{padding:var(--space-8);text-align:center;color:var(--color-text-muted);border:1px dashed color-mix(in oklab,var(--color-text) 16%,transparent);border-radius:var(--radius-xl);background:var(--color-surface)} .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)} .hint{font-size:var(--text-xs);color:var(--color-text-muted)}
-    @media (max-width:1100px){.layout,.grid-2{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}} @media (max-width:760px){.field-row,.section-head,.ride-top,.topbar{grid-template-columns:1fr;display:grid}.stats-grid{grid-template-columns:1fr}.app{padding:var(--space-3)}.hero,.sidebar,.section{padding:var(--space-4)}}
+    :root,[data-theme="light"]{--bg:#f7f6f2;--surface:#fff;--surface2:#fbfbf9;--text:#26231b;--muted:#7d7b75;--primary:#01696f;--primary2:#d9e9e7;--danger:#a13544;--border:#dad7d0;--shadow:0 8px 24px rgba(0,0,0,.08);--r:18px;--r2:12px;font-family:system-ui,sans-serif}
+    [data-theme="dark"]{--bg:#171614;--surface:#1f1e1b;--surface2:#252420;--text:#e1dfdc;--muted:#a3a19b;--primary:#4f98a3;--primary2:#2d383a;--danger:#dd6974;--border:#3a3936;--shadow:0 8px 24px rgba(0,0,0,.28)}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text)} button,input{font:inherit} button{cursor:pointer;border:0}
+    .app{max-width:1100px;margin:0 auto;padding:16px} .top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+    .brand h1{margin:0;font-size:1.8rem}.brand p{margin:4px 0 0;color:var(--muted)} .theme{width:44px;height:44px;border-radius:999px;background:var(--surface);color:var(--text);box-shadow:var(--shadow);border:1px solid var(--border)}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-bottom:14px}
+    .row{display:grid;grid-template-columns:1.2fr 1fr auto;gap:12px;align-items:end} .field{display:grid;gap:8px} label{font-weight:700;font-size:.95rem}
+    input{width:100%;min-height:46px;border-radius:var(--r2);border:1px solid var(--border);background:var(--surface2);color:var(--text);padding:0 14px} input:focus{outline:2px solid var(--primary);outline-offset:2px}
+    .btn{min-height:46px;padding:0 16px;border-radius:var(--r2);font-weight:700}.primary{background:var(--primary);color:#fff}.secondary{background:transparent;color:var(--text);border:1px solid var(--border)} .danger{background:transparent;color:var(--danger);border:1px solid color-mix(in oklab,var(--danger) 35%, var(--border))}
+    .section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 10px} .muted{color:var(--muted);font-size:.95rem}
+    .chips{display:flex;flex-wrap:wrap;gap:10px}.chip{padding:12px 16px;border-radius:999px;background:var(--surface2);border:2px solid transparent;font-weight:700}.chip.active{background:var(--primary2);border-color:var(--primary);color:var(--primary)}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{padding:14px;border-radius:14px;background:var(--surface2)} .stat strong{display:block;font-size:1.8rem;line-height:1}.stat span{color:var(--muted);font-size:.92rem}
+    .list{display:grid;gap:10px}.ride{padding:14px;border-radius:16px;background:var(--surface2);border:1px solid var(--border)} .ride-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.ride-top h3{margin:0;font-size:1.05rem}.ride-top small{color:var(--muted)} .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.pill{padding:8px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--border);font-size:.9rem}
+    .member-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end}.tiny{font-size:.9rem;color:var(--muted)} .empty{padding:22px;border-radius:16px;border:1px dashed var(--border);text-align:center;color:var(--muted)}
+    @media (max-width:800px){.row,.stats,.member-row{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
   </style>
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-
-<style>
-.readonly-mode { pointer-events: none; }
-.admin-mode .member-item, .admin-mode .chip {
-  border: 1px solid color-mix(in oklab, var(--color-text) 14%, transparent);
-  box-shadow: 0 0 0 2px transparent;
-  border-radius: var(--radius-lg);
-  outline: 2px solid transparent;
-  transition: outline 0.2s, border-color 0.2s, background 0.2s;
-}
-
-.admin-mode .member-item:hover,
-.admin-mode .chip:hover {
-  outline: 2px solid var(--color-primary);
-  border-color: var(--color-primary);
-  background: color-mix(in oklab, var(--color-primary-highlight) 80%, transparent);
-}
-
-.admin-mode .member-item.active,
-.admin-mode .chip.active {
-  outline: 2px solid var(--color-primary);
-  border-color: var(--color-primary);
-  background: color-mix(in oklab, var(--color-primary-highlight) 80%, transparent);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-</style>
 </head>
 <body>
   <div class="app">
-    <header class="topbar">
-      <div class="brand">
-        <svg class="logo" viewBox="0 0 64 64" fill="none" aria-label="Radfreunde Logo"><circle cx="20" cy="44" r="8" stroke="currentColor" stroke-width="4"></circle><circle cx="46" cy="44" r="8" stroke="currentColor" stroke-width="4"></circle><path d="M20 44l8-16h10l8 16M28 28l-6-8M38 28l6-6" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-        <div><h1>Radfreunde V5</h1><p>Mit Suche und Medaillen</p></div>
-      </div>
-      <button class="theme-toggle" type="button" aria-label="Farbschema wechseln" data-theme-toggle>◐</button>
-    </header>
+    <div class="top">
+      <div class="brand"><h1>Radfreunde</h1><p>Datum wählen, Teilnehmer anklicken, Tour speichern</p></div>
+      <button class="theme" id="themeBtn" aria-label="Farbschema wechseln">◐</button>
+    </div>
 
-    <main>
-      <section class="layout">
-        <article class="panel hero">
-          <span class="eyebrow">Version 4</span>
-          <h2>Monate, Jahre und Suche direkt auswerten.</h2>
-          <p>Du kannst jetzt die Rangliste für alle Daten, für ein bestimmtes Jahr oder für einen bestimmten Monat anzeigen lassen.</p>
-          <div class="controls">
-            <div class="field-row">
-              <div class="field"><label for="memberName">Neuen Teilnehmer hinzufügen</label><input id="memberName" type="text" placeholder="Name eingeben" /></div>
-              <div class="field"><label for="quickPreset">Beispielnamen laden</label><select id="quickPreset"><option value="">Bitte wählen</option><option value="demo">30 Beispielnamen einfügen</option></select></div>
-              <button class="btn btn-primary" id="addMemberBtn" type="button">Teilnehmer speichern</button>
-            </div>
-            <div class="field-row">
-              
-              <div class="field"><label for="rideDate">Datum</label><input id="rideDate" type="date" /></div>
-              <button class="btn btn-secondary" id="todayBtn" type="button">Heute setzen</button>
-            </div>
-          </div>
-          <div class="stats-grid">
-            <div class="stat"><strong id="totalMembers">0</strong><span>Teilnehmer</span></div>
-            <div class="stat"><strong id="totalRides">0</strong><span>Ausfahrten gesamt</span></div>
-            <div class="stat"><strong id="topMember">-</strong><span>Spitzenreiter im Filter</span></div>
-            <div class="stat"><strong id="avgParticipants">0</strong><span>Ø Teilnehmer im Filter</span></div>
-            <div class="stat"><strong id="lastRideDate">-</strong><span>Letzte Ausfahrt</span></div>
-          </div>
-        </article>
-
-        <aside class="panel sidebar">
-          <div><h3>Teilnehmer wählen</h3><p class="helper">Ein Klick markiert den Namen für die aktuelle Ausfahrt.</p></div>
-          <div class="chip-list" id="memberChips"></div>
-          <div class="tools"><button class="btn btn-primary" id="saveRideBtn" type="button">Ausfahrt speichern</button><button class="btn btn-secondary" id="selectAllBtn" type="button">Alle markieren</button><button class="btn btn-secondary" id="clearSelectionBtn" type="button">Auswahl löschen</button></div>
-          <div class="tools"><button class="btn btn-secondary" id="exportJsonBtn" type="button">JSON sichern</button><label class="btn btn-secondary" style="position:relative;overflow:hidden;display:inline-flex;align-items:center;">JSON einlesen<input id="importJsonFile" type="file" accept=".json,application/json" style="position:absolute;inset:0;opacity:0;cursor:pointer"></label></div>
-          <div class="status" id="storageStatus">Speicherstatus wird geladen …</div>
-          <div><h3>Teilnehmerliste</h3><div class="list-box" id="memberList"></div></div>
-        </aside>
-      </section>
-
-      <section class="panel section">
-        <div class="section-head">
-          <div><h3>Rangliste</h3><p class="helper">Gesamt, Jahr oder Monat auswählbar.</p></div>
-          <div class="tools">
-            <select id="periodFilter"><option value="all">Gesamt</option><option value="year">Jahr</option><option value="month">Monat</option></select>
-            <select id="yearFilter"></select>
-            <select id="monthFilter"></select>
-            <button class="btn btn-secondary" id="top10Btn" type="button">Nur Top 10</button>
-            <button class="btn btn-danger" id="resetAllBtn" type="button">Alles zurücksetzen</button>
-          </div>
+    <div class="card">
+      <div class="row">
+        <div class="field">
+          <label for="rideDate">Datum der Ausfahrt</label>
+          <input id="rideDate" type="date" />
         </div>
-        <div id="rankingWrap"></div>
-      </section>
+        <div>
+          <div class="section-title"><strong>Teilnehmer auswählen</strong><span class="muted" id="selCount">0 ausgewählt</span></div>
+          <div class="chips" id="memberChips"></div>
+        </div>
+        <button class="btn primary" id="saveRideBtn">Tour abschließen</button>
+      </div>
+      <p class="tiny">Die ausgewählten Teilnehmer werden unten gespeichert. Falsche Einträge kannst du später noch bearbeiten.</p>
+    </div>
 
-      <section class="panel section">
-        <div class="section-head"><div><h3>Zeitraum-Statistik</h3><p class="helper">Jahre und Monate im Überblick.</p></div></div>
-        <div id="periodStatsWrap"></div>
-      </section>
+    <div class="stats">
+      <div class="stat"><strong id="totalMembers">0</strong><span>Teilnehmer</span></div>
+      <div class="stat"><strong id="totalRides">0</strong><span>Touren</span></div>
+      <div class="stat"><strong id="topMember">-</strong><span>Spitzenreiter</span></div>
+      <div class="stat"><strong id="lastRide">-</strong><span>Letzte Tour</span></div>
+    </div>
 
-      <section class="panel section">
-        <div class="section-head"><div><h3>Ausfahrten</h3><p class="helper">Alle gespeicherten Runden mit Teilnehmern.</p></div></div>
-        <div id="ridesWrap"></div>
-      </section>
-    </main>
+    <div class="card">
+      <div class="section-title"><strong>Gespeicherte Touren</strong><span class="muted">Bearbeiten ist jederzeit möglich</span></div>
+      <div class="list" id="ridesWrap"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title"><strong>Teilnehmer verwalten</strong><span class="muted">Ändert sich selten</span></div>
+      <div class="member-row">
+        <div class="field">
+          <label for="memberName">Teilnehmer hinzufügen</label>
+          <input id="memberName" type="text" placeholder="Name eingeben" />
+        </div>
+        <button class="btn secondary" id="addMemberBtn">Hinzufügen</button>
+      </div>
+      <div style="height:12px"></div>
+      <div class="member-row">
+        <div class="field">
+          <label for="deleteMember">Teilnehmer löschen</label>
+          <input id="deleteMember" type="text" placeholder="Name eingeben" />
+        </div>
+        <button class="btn danger" id="deleteMemberBtn">Löschen</button>
+      </div>
+    </div>
   </div>
 
   <script>
-    const DB_NAME = 'radfreunde-ausfahrten-db';
-    const STORE_NAME = 'appState';
-    const STATE_KEY = 'main';
-    const MONTH_NAMES = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
-    const presetNames = ['Andreas','Bernd','Claus','Dieter','Egon','Frank','Gerd','Harald','Helmut','Jürgen','Karl','Klaus','Manfred','Martin','Norbert','Peter','Ralf','Reiner','Stefan','Thomas','Uli','Volker','Walter','Werner','Wolfgang','Hans','Erich','Roland','Achim','Jochen'];
-    const state = { members: [], rides: [], selectedMembers: new Set(), top10Only: false, period: 'all', filterYear: '', filterMonth: '', search: '' };
+    const DB_NAME='radfreunde-db';
+    const STORE='state';
+    const KEY='main';
+    const state={members:[], rides:[], selected:new Set()};
     let db;
+    const $=id=>document.getElementById(id);
+    const themeBtn=$('themeBtn');
+    const rideDate=$('rideDate');
+    const memberChips=$('memberChips');
+    const selCount=$('selCount');
+    const ridesWrap=$('ridesWrap');
+    const totalMembers=$('totalMembers');
+    const totalRides=$('totalRides');
+    const topMember=$('topMember');
+    const lastRide=$('lastRide');
+    const memberName=$('memberName');
+    const deleteMember=$('deleteMember');
+    const addMemberBtn=$('addMemberBtn');
+    const deleteMemberBtn=$('deleteMemberBtn');
+    const saveRideBtn=$('saveRideBtn');
 
-    const $ = id => document.getElementById(id);
-    const memberName = $('memberName'), quickPreset = $('quickPreset'), addMemberBtn = $('addMemberBtn'), rideTitle = $('rideTitle'), rideDate = $('rideDate'), todayBtn = $('todayBtn');
-    const memberChips = $('memberChips'), memberList = $('memberList'), saveRideBtn = $('saveRideBtn'), selectAllBtn = $('selectAllBtn'), clearSelectionBtn = $('clearSelectionBtn');
-    const exportJsonBtn = $('exportJsonBtn'), importJsonFile = $('importJsonFile'), storageStatus = $('storageStatus');
-    const periodFilter = $('periodFilter'), yearFilter = $('yearFilter'), monthFilter = $('monthFilter'), top10Btn = $('top10Btn'), resetAllBtn = $('resetAllBtn'), searchMember = $('searchMember');
-    const rankingWrap = $('rankingWrap'), periodStatsWrap = $('periodStatsWrap'), ridesWrap = $('ridesWrap');
-    const totalMembers = $('totalMembers'), totalRides = $('totalRides'), topMember = $('topMember'), avgParticipants = $('avgParticipants'), lastRideDate = $('lastRideDate');
+    function esc(s){return String(s).replace(/[&<>\"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[m]))}
+    function fmt(d){return d?new Date(d+'T12:00:00').toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'}):'-'}
+    function loadTheme(){const t=localStorage.getItem('theme')||('matchMedia' in window && matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); document.documentElement.setAttribute('data-theme',t)}
+    function saveTheme(t){localStorage.setItem('theme',t); document.documentElement.setAttribute('data-theme',t)}
+    themeBtn.onclick=()=>saveTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')
 
-    const root = document.documentElement; const themeToggle = document.querySelector('[data-theme-toggle]'); let theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light'; root.setAttribute('data-theme', theme); themeToggle.onclick=()=>{theme=theme==='dark'?'light':'dark';root.setAttribute('data-theme',theme)};
-    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
-    const escapeHtml = text => text.replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
-    const formatDate = d => d ? new Date(d+'T12:00:00').toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'}) : 'ohne Datum';
-    const rideParts = ride => ({ year:(ride.date||'').slice(0,4), month:(ride.date||'').slice(0,7) });
+    function openDb(){return new Promise((res,rej)=>{const r=indexedDB.open(DB_NAME,1); r.onupgradeneeded=e=>e.target.result.createObjectStore(STORE); r.onsuccess=()=>{db=r.result;res()}; r.onerror=()=>rej(r.error)})}
+    function persist(){const tx=db.transaction(STORE,'readwrite'); tx.objectStore(STORE).put({members:state.members,rides:state.rides},KEY)}
+    function hydrate(){return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readonly'); const r=tx.objectStore(STORE).get(KEY); r.onsuccess=()=>{const d=r.result||{}; state.members=d.members||[]; state.rides=d.rides||[]; res()}; r.onerror=()=>rej(r.error)})}
 
-    function openDb(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,2); req.onupgradeneeded=e=>{const database=e.target.result; if(!database.objectStoreNames.contains(STORE_NAME)) database.createObjectStore(STORE_NAME)}; req.onsuccess=()=>{db=req.result; resolve()}; req.onerror=()=>reject(req.error)})}
-    function saveDb(){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE_NAME,'readwrite'); tx.objectStore(STORE_NAME).put({members:state.members, rides:state.rides, top10Only:state.top10Only, period:state.period, filterYear:state.filterYear, filterMonth:state.filterMonth, search:state.search}, STATE_KEY); tx.oncomplete=()=>{storageStatus.textContent='Dauerhaft im Browser gespeichert'; resolve()}; tx.onerror=()=>reject(tx.error)})}
-    function loadDb(){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE_NAME,'readonly'); const req=tx.objectStore(STORE_NAME).get(STATE_KEY); req.onsuccess=()=>{const data=req.result; if(data){state.members=data.members||[]; state.rides=data.rides||[]; state.top10Only=!!data.top10Only; state.period=data.period||'all'; state.filterYear=data.filterYear||''; state.filterMonth=data.filterMonth||''; state.search=data.search||'';} storageStatus.textContent='Dauerhaft im Browser gespeichert'; resolve()}; req.onerror=()=>reject(req.error)})}
-    function downloadJson(){const blob=new Blob([JSON.stringify({members:state.members,rides:state.rides,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='radfreunde-sicherung.json'; a.click(); URL.revokeObjectURL(url)}
+    function addMember(name){const n=name.trim(); if(!n||state.members.some(x=>x.toLowerCase()===n.toLowerCase())) return; state.members.push(n); state.members.sort((a,b)=>a.localeCompare(b,'de')); persist(); render()}
+    function removeMember(name){state.members=state.members.filter(m=>m!==name); state.rides=state.rides.map(r=>({...r,participants:r.participants.filter(p=>p!==name)})); state.selected.delete(name); persist(); render()}
+    function toggleMember(name){state.selected.has(name)?state.selected.delete(name):state.selected.add(name); renderMembers()}
+    function saveRide(){const participants=[...state.selected]; if(!rideDate.value||!participants.length){alert('Bitte Datum und mindestens einen Teilnehmer wählen.'); return} state.rides.unshift({date:rideDate.value, participants, id:Date.now()}); state.selected.clear(); persist(); render()}
+    function editRide(i){const r=state.rides[i]; const d=prompt('Datum ändern (YYYY-MM-DD):', r.date); if(!d) return; const p=prompt('Teilnehmer mit | getrennt eingeben:', r.participants.join('|')); if(p===null) return; r.date=d; r.participants=p.split('|').map(x=>x.trim()).filter(Boolean); r.participants.forEach(x=>{if(!state.members.includes(x)) state.members.push(x)}); state.members.sort((a,b)=>a.localeCompare(b,'de')); persist(); render()}
 
-    function addMember(name){const clean=name.trim(); if(!clean) return; if(state.members.some(m=>m.toLowerCase()===clean.toLowerCase())) return; state.members.push(clean); state.members.sort((a,b)=>a.localeCompare(b,'de')); saveDb(); render();}
-    function getFilteredRides(){return state.rides.filter(ride=>{const p=rideParts(ride); if(state.period==='year' && state.filterYear && p.year!==state.filterYear) return false; if(state.period==='month' && state.filterMonth && p.month!==state.filterMonth) return false; return true;})}
-    function getRanking(){const rides=getFilteredRides(); return state.members.filter(name=>!state.search || name.toLowerCase().includes(state.search.toLowerCase())).map(name=>{const count=rides.filter(r=>r.participants.includes(name)).length; const percent=rides.length?Math.round(count/rides.length*100):0; return {name,count,percent}}).sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name,'de'))}
-    function getYears(){return [...new Set(state.rides.map(r=>(r.date||'').slice(0,4)).filter(Boolean))].sort().reverse()}
-    function getMonths(){return [...new Set(state.rides.map(r=>(r.date||'').slice(0,7)).filter(Boolean))].sort().reverse()}
-
-    function fillFilters(){
-      const years=getYears(), months=getMonths();
-      yearFilter.innerHTML=['<option value="">Alle Jahre</option>',...years.map(y=>`<option value="${y}">${y}</option>`)].join('');
-      monthFilter.innerHTML=['<option value="">Alle Monate</option>',...months.map(m=>{const [y,mo]=m.split('-'); return `<option value="${m}">${MONTH_NAMES[Number(mo)-1]} ${y}</option>`})].join('');
-      periodFilter.value=state.period; yearFilter.value=state.filterYear; monthFilter.value=state.filterMonth;
-      yearFilter.style.display=state.period==='year'?'inline-flex':'none'; monthFilter.style.display=state.period==='month'?'inline-flex':'none';
+    function renderMembers(){
+      selCount.textContent=`${state.selected.size} ausgewählt`;
+      memberChips.innerHTML = state.members.length ? state.members.map(n=>`<button class="chip ${state.selected.has(n)?'active':''}" data-name="${esc(n)}">${esc(n)}</button>`).join('') : '<div class="empty">Noch keine Teilnehmer angelegt.</div>';
     }
+    function renderStats(){
+      totalMembers.textContent=state.members.length;
+      totalRides.textContent=state.rides.length;
+      const counts=state.members.map(n=>[n,state.rides.filter(r=>r.participants.includes(n)).length]).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'de'));
+      topMember.textContent=counts[0]&&counts[0][1]>0?`${counts[0][0]} (${counts[0][1]})`:'-';
+      lastRide.textContent=state.rides[0]?fmt(state.rides[0].date):'-';
+    }
+    function renderRides(){
+      if(!state.rides.length){ridesWrap.innerHTML='<div class="empty">Noch keine Tour gespeichert.</div>'; return}
+      ridesWrap.innerHTML=state.rides.map((r,i)=>`<div class="ride"><div class="ride-top"><div><h3>${fmt(r.date)}</h3><small>${r.participants.length} Teilnehmer</small></div><button class="btn secondary" data-edit="${i}">Bearbeiten</button></div><div class="pills">${r.participants.map(p=>`<span class="pill">${esc(p)}</span>`).join('')}</div></div>`).join('')
+    }
+    function render(){renderMembers(); renderStats(); renderRides()}
 
-    function renderMemberChips(){memberChips.innerHTML = state.members.length ? state.members.map(name=>{const active=state.selectedMembers.has(name); return `<button type="button" class="chip" data-chip="${escapeHtml(name)}" style="border:${active?'1px solid var(--color-primary)':'1px solid transparent'}">${escapeHtml(name)}</button>`}).join('') : '<div class="empty" style="padding:var(--space-4);width:100%;">Noch keine Teilnehmer gespeichert.</div>'}
-    function renderMemberList(){memberList.innerHTML = state.members.length ? state.members.map((name,index)=>`<div class="member-item"><div><strong>${index+1}. ${escapeHtml(name)}</strong><br><span class="hint">${state.rides.filter(r=>r.participants.includes(name)).length} Ausfahrten gesamt</span></div><button class="btn btn-secondary" style="min-height:36px;padding:.45rem .7rem;" data-remove-member="${escapeHtml(name)}">Entfernen</button></div>`).join('') : '<div class="empty" style="padding:var(--space-4);">Füge oben den ersten Namen hinzu.</div>'}
-    function renderRanking(){const ranking=getRanking(); const view=state.top10Only?ranking.slice(0,10):ranking; const rides=getFilteredRides(); const max=Math.max(...ranking.map(x=>x.count),1); totalMembers.textContent=state.members.length; totalRides.textContent=state.rides.length; topMember.textContent=ranking[0]&&ranking[0].count>0?`${ranking[0].name} (${ranking[0].count})`:'-'; avgParticipants.textContent=rides.length?(rides.reduce((s,r)=>s+r.participants.length,0)/rides.length).toFixed(1).replace('.',','):'0'; lastRideDate.textContent=state.rides[0]?.date?formatDate(state.rides[0].date):'-'; top10Btn.textContent=state.top10Only?'Alle anzeigen':'Nur Top 10'; const medals=['🥇','🥈','🥉']; rankingWrap.innerHTML = ranking.length ? `<table class="rank-table"><thead><tr><th>Platz</th><th>Name</th><th>Ausfahrten</th><th>Anteil</th><th>Auszeichnung</th><th>Verlauf</th></tr></thead><tbody>${view.map((item,index)=>{const place=state.top10Only?index:ranking.indexOf(item); const medal=place<3&&item.count>0?medals[place]:''; return `<tr><td>${place+1}</td><td><strong>${escapeHtml(item.name)}</strong></td><td>${item.count}</td><td>${item.percent}%</td><td style="font-size:1.2rem">${medal}</td><td><div class="bar-wrap"><div class="bar" style="width:${(item.count/max)*100}%"></div></div></td></tr>`}).join('')}</tbody></table>` : '<div class="empty">Noch keine Teilnehmer vorhanden.</div>'}
-    function renderPeriodStats(){const years={}; const months={}; state.rides.forEach(r=>{const p=rideParts(r); if(p.year) years[p.year]=(years[p.year]||0)+1; if(p.month) months[p.month]=(months[p.month]||0)+1}); const yearRows=Object.entries(years).sort((a,b)=>b[0].localeCompare(a[0])).map(([year,count])=>`<tr><td>${year}</td><td>${count}</td></tr>`).join('') || '<tr><td colspan="2">Noch keine Daten</td></tr>'; const monthRows=Object.entries(months).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,12).map(([m,count])=>{const [y,mo]=m.split('-'); return `<tr><td>${MONTH_NAMES[Number(mo)-1]} ${y}</td><td>${count}</td></tr>`}).join('') || '<tr><td colspan="2">Noch keine Daten</td></tr>'; periodStatsWrap.innerHTML = `<div class="grid-2"><div class="ride-card"><h4 style="margin:0 0 var(--space-3);">Ausfahrten pro Jahr</h4><table class="rank-table"><thead><tr><th>Jahr</th><th>Ausfahrten</th></tr></thead><tbody>${yearRows}</tbody></table></div><div class="ride-card"><h4 style="margin:0 0 var(--space-3);">Letzte 12 Monate</h4><table class="rank-table"><thead><tr><th>Monat</th><th>Ausfahrten</th></tr></thead><tbody>${monthRows}</tbody></table></div></div>`}
-    function renderRides(){ridesWrap.innerHTML = state.rides.length ? `<div class="rides-list">${state.rides.map((ride,index)=>`<article class="ride-card"><div class="ride-top"><div><strong>${escapeHtml(ride.title||'Ausfahrt')}</strong><div class="helper">${formatDate(ride.date)} · ${ride.participants.length} Teilnehmer</div></div><button class="btn btn-secondary" type="button" data-delete-ride="${index}">Löschen</button></div><div class="participants">${ride.participants.map(name=>`<span class="pill">${escapeHtml(name)}</span>`).join('')}</div></article>`).join('')}</div>` : '<div class="empty">Noch keine Ausfahrt gespeichert.</div>'}
-    function render(){fillFilters(); renderMemberChips(); renderMemberList(); renderRanking(); renderPeriodStats(); renderRides()}
-
+    memberChips.addEventListener('click',e=>{const b=e.target.closest('[data-name]'); if(!b) return; toggleMember(b.dataset.name)});
     addMemberBtn.onclick=()=>{addMember(memberName.value); memberName.value=''; memberName.focus()};
     memberName.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault(); addMemberBtn.click()}});
-    quickPreset.onchange=()=>{if(quickPreset.value==='demo'){presetNames.forEach(addMember); quickPreset.value=''}};
-    todayBtn.onclick=()=>rideDate.value=new Date().toISOString().slice(0,10);
-    memberChips.onclick=e=>{const chip=e.target.closest('[data-chip]'); if(!chip) return; const name=chip.dataset.chip; state.selectedMembers.has(name)?state.selectedMembers.delete(name):state.selectedMembers.add(name); renderMemberChips()};
-    memberList.onclick=e=>{const b=e.target.closest('[data-remove-member]'); if(!b) return; const name=b.dataset.removeMember; state.members=state.members.filter(m=>m!==name); state.selectedMembers.delete(name); state.rides=state.rides.map(r=>({...r,participants:r.participants.filter(p=>p!==name)})); saveDb(); render()};
-    selectAllBtn.onclick=()=>{state.selectedMembers=new Set(state.members); renderMemberChips()};
-    clearSelectionBtn.onclick=()=>{state.selectedMembers.clear(); renderMemberChips()};
-    saveRideBtn.onclick=()=>{const participants=[...state.selectedMembers].sort((a,b)=>a.localeCompare(b,'de')); if(!participants.length){alert('Bitte mindestens einen Teilnehmer auswählen.'); return} state.rides.unshift({title:rideTitle.value.trim()||'Ausfahrt',date:rideDate.value,participants}); state.selectedMembers.clear(); rideTitle.value=''; saveDb(); render()};
-    ridesWrap.onclick=e=>{const b=e.target.closest('[data-delete-ride]'); if(!b) return; state.rides.splice(Number(b.dataset.deleteRide),1); saveDb(); render()};
-    top10Btn.onclick=()=>{state.top10Only=!state.top10Only; saveDb(); render()};
-    periodFilter.onchange=()=>{state.period=periodFilter.value; saveDb(); render()};
-    yearFilter.onchange=()=>{state.filterYear=yearFilter.value; if(state.filterYear) state.period='year'; saveDb(); render()};
-    monthFilter.onchange=()=>{state.filterMonth=monthFilter.value; if(state.filterMonth) state.period='month'; saveDb(); render()};
-    searchMember.oninput=()=>{state.search=searchMember.value; saveDb(); render()};
-    resetAllBtn.onclick=()=>{if(!confirm('Wirklich alle Teilnehmer und Ausfahrten löschen?')) return; state.members=[]; state.rides=[]; state.selectedMembers.clear(); state.top10Only=false; state.period='all'; state.filterYear=''; state.filterMonth=''; saveDb(); render()};
-    exportJsonBtn.onclick=downloadJson;
-    importJsonFile.onchange=e=>{const file=e.target.files[0]; if(!file) return; const reader=new FileReader(); reader.onload=()=>{try{const data=JSON.parse(reader.result); state.members=Array.isArray(data.members)?data.members:[]; state.rides=Array.isArray(data.rides)?data.rides:[]; state.selectedMembers.clear(); saveDb(); render(); alert('JSON-Sicherung wurde eingelesen.');}catch{alert('Die JSON-Datei konnte nicht gelesen werden.')}}; reader.readAsText(file,'utf-8'); e.target.value=''};
-
+    deleteMemberBtn.onclick=()=>{removeMember(deleteMember.value.trim()); deleteMember.value=''; deleteMember.focus()};
+    saveRideBtn.onclick=saveRide;
+    ridesWrap.addEventListener('click',e=>{const b=e.target.closest('[data-edit]'); if(!b) return; editRide(Number(b.dataset.edit))});
     rideDate.value=new Date().toISOString().slice(0,10);
-    if(!('indexedDB' in window)){storageStatus.textContent='IndexedDB wird in diesem Browser nicht unterstützt'; render()} else {openDb().then(loadDb).then(()=>{searchMember.value=state.search; render()}).catch(()=>{storageStatus.textContent='Dauerhafte Speicherung nicht verfügbar'; render()})}
+    loadTheme();
+    if('indexedDB' in window){openDb().then(hydrate).then(render)} else render();
   </script>
-
-<script>
-(function() {
-  const params = new URLSearchParams(window.location.search);
-  const isAdmin = params.get('admin') === 'radfreunde2026';
-  const controls = document.querySelectorAll('.controls input, .controls select, .controls button, .sidebar .btn, .member-item button, .ride-card button');
-  if (!isAdmin) {
-    controls.forEach(el => { el.disabled = true; el.style.display = 'none'; });
-    const banner = document.createElement('div');
-    banner.textContent = 'Lesemodus — nur Anzeige';
-    banner.style.cssText = 'position:sticky;top:0;z-index:20;padding:12px 16px;background:#01696f;color:#fff;font-weight:700;text-align:center';
-    document.body.prepend(banner);
-    document.body.classList.add('readonly-mode');
-  } else {
-    document.body.classList.add('admin-mode');
-  }
-})();
-</script>
 </body>
 </html>
